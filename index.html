@@ -164,10 +164,10 @@
             font-size: 1rem; cursor: pointer; margin-top: 15px; width: 100%;
         }
 
-        /* --- FINAL MESSAGE (จัดตรงกลางทั้งหมด) --- */
+        /* --- FINAL MESSAGE --- */
         .final-msg-container {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.3); /* ฉากหลังมืดเล็กน้อยให้กรอบขาวเด่น */
+            background: rgba(0,0,0,0.3);
             z-index: 200; display: none; 
             align-items: center; justify-content: center;
             opacity: 0; transition: opacity 1.2s ease-out;
@@ -183,11 +183,11 @@
             max-width: 380px;
             max-height: 85vh; 
             overflow-y: auto;
-            text-align: center; /* จัดตัวอักษรให้อยู่กลาง */
+            text-align: center;
             transform: scale(0.8); transition: all 1s;
             display: flex;
             flex-direction: column;
-            align-items: center; /* จัด element ให้อยู่กลางตามแนวขวาง */
+            align-items: center;
         }
         .final-msg-container.show-final { display: flex; opacity: 1; }
         .final-msg-container.show-final .final-msg-box { transform: scale(1); }
@@ -220,7 +220,7 @@
 
     <div id="page1" class="page active">
         <div class="chase-area">
-            <h2 style="text-align:center; margin-top:100px;">จดหมายรักฉบับนี้<br>ต้องใช้ความพยายามนะ! 😝</h2>
+            <h2 style="text-align:center; margin-top:100px;">จดหมายฉบับนี้<br>ต้องใช้ความพยายามนะ! 😝</h2>
             <div class="flying-envelope" id="envelope" onmouseover="moveEnv()" ontouchstart="moveEnvMobile(event)">
                 <div class="wing left"></div><div class="env-body">💌</div><div class="wing right"></div>
             </div>
@@ -229,7 +229,7 @@
     </div>
 
     <div id="page2" class="page">
-        <h2 style="margin-bottom:20px;">เรารักกันมา...</h2>
+        <h2 style="margin-bottom:20px;">เราคุยกันมา...</h2>
         <div class="timer-display" id="timer">คำนวณเวลา...</div>
         <div class="heart-container" onclick="fillHeart()">
             <svg viewBox="0 0 200 200" width="100%" height="100%">
@@ -242,7 +242,7 @@
             </svg>
             <div style="position:absolute; top:45%; width:100%; text-align:center; color:#fff; font-weight:bold;"><span id="percent">0%</span></div>
         </div>
-        <p class="tap-msg">👆 จิ้มหัวใจเติมรักให้เต็ม!</p>
+        <p class="tap-msg">👆 จิ้มหัวใจเพื่อไปต่อ!</p>
     </div>
 
     <div id="page3" class="page">
@@ -296,8 +296,8 @@
     </div>
 
     <script>
-        // เริ่มความสัมพันธ์ 10 พ.ย. 2024
-        const startDate = new Date(2024, 10, 10); 
+        // แก้ไขวันที่เริ่มคุยเป็น 10 พ.ย. 2025
+        const startDate = new Date(2025, 10, 10); 
         const photos = [
             { src: "photo1.jpg", caption: "ไปดูหนังแล้วได้ถ่ายรูปด้วยกัน\nครั้งแรก 💕🤏🏻" },
             { src: "photo2.jpg", caption: "ชีเสริฟฟฟฟฟฟเกิ๊นนน🐻" },
@@ -363,11 +363,18 @@
             setInterval(() => {
                 const now = new Date();
                 const diff = now - startDate;
-                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-                const h = Math.floor((diff / (1000*60*60)) % 24);
-                const m = Math.floor((diff / (1000*60)) % 60);
-                const s = Math.floor((diff / 1000) % 60);
-                document.getElementById('timer').innerText = `${days} วัน ${h} ชม. ${m} นาที ${s} วิ`;
+                
+                // คำนวณในกรณีที่วันที่ตั้งไว้เป็นอนาคต (ถ้ายังไม่ถึงวันที่ 10 พ.ย. 2025)
+                const isFuture = diff < 0;
+                const absDiff = Math.abs(diff);
+
+                const days = Math.floor(absDiff / (1000 * 60 * 60 * 24));
+                const h = Math.floor((absDiff / (1000*60*60)) % 24);
+                const m = Math.floor((absDiff / (1000*60)) % 60);
+                const s = Math.floor((absDiff / 1000) % 60);
+                
+                const prefix = isFuture ? "จะเริ่มในอีก " : "";
+                document.getElementById('timer').innerText = `${prefix}${days} วัน ${h} ชม. ${m} นาที ${s} วิ`;
             }, 1000);
         }
         let percent = 0;
@@ -438,4 +445,3 @@
     </script>
 </body>
 </html>
-
