@@ -52,6 +52,7 @@
         .flying-envelope {
             position: absolute; width: 140px; height: 90px;
             cursor: pointer; z-index: 20; transition: transform 0.2s ease-out;
+            left: 50%; top: 50%; transform: translate(-50%, -50%);
         }
         .env-body {
             position: relative; z-index: 2; font-size: 6rem; line-height: 1;
@@ -115,18 +116,36 @@
         .inv-slot.filled { border: 2px solid var(--primary); }
         .inv-slot img { width: 100%; height: 100%; object-fit: cover; }
 
-        /* --- MODAL --- */
+        /* --- MODAL (แก้ไขให้เลื่อนดูข้อความได้) --- */
         .modal-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.75); z-index: 100;
+            background: rgba(0,0,0,0.8); z-index: 100;
             display: none; align-items: center; justify-content: center;
             backdrop-filter: blur(5px);
         }
         .modal-card {
-            background: white; padding: 15px; border-radius: 15px;
-            max-width: 85%; text-align: center; animation: zoomIn 0.3s ease;
+            background: white; padding: 20px; border-radius: 20px;
+            width: 85%; max-height: 80vh; 
+            text-align: center; animation: zoomIn 0.3s ease;
+            display: flex; flex-direction: column;
+            overflow-y: auto; /* เพิ่ม Scrollbar เมื่อเนื้อหายาว */
+            box-sizing: border-box;
         }
-        .modal-card img { width: 100%; border-radius: 10px; }
+        .modal-card img { 
+            width: 100%; border-radius: 15px; 
+            flex-shrink: 0; /* ป้องกันรูปถูกบีบ */
+        }
+        #previewCaption {
+            font-size: 1rem; color: #555; margin: 20px 0; 
+            white-space: pre-wrap; line-height: 1.6;
+            flex-shrink: 0;
+        }
+        .modal-btn {
+            background: var(--primary); color: white; border: none; 
+            padding: 12px 25px; border-radius: 25px;
+            font-family: 'Kanit', sans-serif; font-size: 1rem;
+            flex-shrink: 0; cursor: pointer;
+        }
 
         /* --- FINAL MESSAGE --- */
         .final-msg-container {
@@ -138,10 +157,10 @@
         .final-msg-box {
             background: white; padding: 30px; border-radius: 20px; 
             text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            max-width: 400px;
+            max-width: 400px; width: 100%;
         }
         .final-msg-box h1 { color: var(--primary); margin-top: 0; }
-        .final-msg-box p { line-height: 1.6; color: #444; text-align: left; }
+        .final-msg-box p { line-height: 1.8; color: #444; text-align: left; }
 
         @keyframes zoomIn { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
     </style>
@@ -175,7 +194,7 @@
             </svg>
             <div style="position:absolute; top:45%; width:100%; text-align:center; color:#fff; font-weight:bold;"><span id="percent">0%</span></div>
         </div>
-        <p style="margin-top:20px; color:#999; animation:blink 1s infinite;">👆 จิ้มหัวใจเติมรักให้เต็ม!</p>
+        <p style="margin-top:20px; color:#999;">👆 จิ้มหัวใจเติมรักให้เต็ม!</p>
     </div>
 
     <div id="page3" class="page">
@@ -203,8 +222,8 @@
     <div class="modal-overlay" id="previewModal">
         <div class="modal-card">
             <img src="" id="previewImg">
-            <p id="previewCaption" style="font-weight:400; color:#555; margin:15px 0; white-space: pre-wrap;"></p>
-            <button style="background:var(--primary); color:white; border:none; padding:10px 20px; border-radius:20px;" onclick="confirmKeep()">เก็บเข้ากระเป๋า ❤️</button>
+            <p id="previewCaption"></p>
+            <button class="modal-btn" onclick="confirmKeep()">เก็บเข้ากระเป๋า ❤️</button>
         </div>
     </div>
 
@@ -228,8 +247,7 @@
     </div>
 
     <script>
-        // --- CONFIG ---
-        const startDate = new Date(2024, 10, 10); // 10 พฤศจิกายน 2024
+        const startDate = new Date(2024, 10, 10); 
         const photos = [
             { src: "photo1.jpg", caption: "ไปดูหนังแล้วได้ถ่ายรูปด้วยกัน\nครั้งแรก 💕🤏🏻" },
             { src: "photo2.jpg", caption: "ชีเสริฟฟฟฟฟฟเกิ๊นนน🐻" },
