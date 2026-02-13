@@ -24,7 +24,7 @@
             -webkit-tap-highlight-color: transparent;
         }
 
-        /* --- BACKGROUND FLOATERS (GLOBAL) --- */
+        /* --- BACKGROUND FLOATERS --- */
         .bg-floaters {
             position: fixed; width: 100%; height: 100%; top: 0; left: 0;
             pointer-events: none; z-index: 0; overflow: hidden;
@@ -39,7 +39,6 @@
             100% { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
         }
 
-        /* --- PAGES CONFIG --- */
         .page {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
             display: none; flex-direction: column; align-items: center; justify-content: center;
@@ -73,20 +72,17 @@
         }
         @keyframes pulse { 50% { opacity: 0.6; transform: scale(0.95); } }
 
-        /* --- PAGE 2: TIMER & HEART --- */
+        /* --- PAGE 2: TIMER --- */
         .timer-display {
             font-size: 1.1rem; color: var(--primary); 
             background: white; padding: 15px 25px; border-radius: 50px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.08); margin-bottom: 30px;
-            font-weight: 400; text-align: center; white-space: nowrap;
+            font-weight: 400; text-align: center;
         }
         .heart-container {
             width: 220px; height: 200px; position: relative; cursor: pointer;
-            transition: transform 0.1s; filter: drop-shadow(0 10px 20px rgba(255, 92, 138, 0.4));
+            filter: drop-shadow(0 10px 20px rgba(255, 92, 138, 0.4));
         }
-        .heart-container:active { transform: scale(0.95); }
-        .tap-msg { margin-top: 20px; color: #999; font-size: 0.9rem; animation: blink 1s infinite; }
-        @keyframes blink { 50% { opacity: 0.5; } }
 
         /* --- PAGE 3: SCRATCH --- */
         .scratch-box {
@@ -98,109 +94,66 @@
         /* --- PAGE 4: LIVING ROOM --- */
         .room-scene {
             width: 100%; height: 100%; position: relative;
-            overflow: hidden;
             background-image: url('photo6.jpg'); 
-            background-size: cover;
-            background-position: center;
+            background-size: cover; background-position: center;
         }
-        
-        .game-hint {
-            position: absolute; top: 70px; left: 50%; transform: translateX(-50%);
-            background: rgba(255,255,255,0.9); color: var(--accent);
-            padding: 8px 20px; border-radius: 20px; font-size: 0.9rem;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1); z-index: 40;
-            white-space: nowrap; animation: floatHint 2s infinite ease-in-out;
-        }
-        @keyframes floatHint { 0%,100% { transform: translate(-50%, 0); } 50% { transform: translate(-50%, -5px); } }
-
         .hidden-item {
-            position: absolute; width: 45px; height: 55px; cursor: pointer;
-            z-index: 10; opacity: 0.9; transition: transform 0.2s;
-            background: white; padding: 3px; border-radius: 3px; box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+            position: absolute; width: 50px; height: 65px; cursor: pointer;
+            z-index: 10; background: white; padding: 3px; border-radius: 3px; box-shadow: 0 3px 10px rgba(0,0,0,0.2);
         }
-        .hidden-item:hover { transform: scale(1.1); filter: brightness(1.2); }
-        .hidden-item img { width: 100%; height: 100%; object-fit: cover; border-radius: 2px; }
+        .hidden-item img { width: 100%; height: 100%; object-fit: cover; }
 
         .inventory {
             position: absolute; top: 15px; right: 15px;
             background: rgba(255,255,255,0.95); padding: 8px; border-radius: 15px;
-            display: flex; gap: 5px; box-shadow: 0 5px 15px rgba(0,0,0,0.15); z-index: 50;
+            display: flex; gap: 5px; z-index: 50;
         }
         .inv-slot {
             width: 35px; height: 35px; background: #eee; border-radius: 8px;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 0.8rem; color: #ccc; overflow: hidden; transition: 0.3s;
+            display: flex; align-items: center; justify-content: center; overflow: hidden;
         }
-        .inv-slot.filled { background: white; border: 2px solid var(--primary); }
-        .inv-slot.filled img { width: 100%; height: 100%; object-fit: cover; }
+        .inv-slot.filled { border: 2px solid var(--primary); }
+        .inv-slot img { width: 100%; height: 100%; object-fit: cover; }
 
+        /* --- MODAL --- */
         .modal-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.7); z-index: 100;
+            background: rgba(0,0,0,0.75); z-index: 100;
             display: none; align-items: center; justify-content: center;
             backdrop-filter: blur(5px);
         }
         .modal-card {
-            background: white; padding: 15px 15px 30px 15px;
-            border-radius: 10px; 
-            max-width: 280px; text-align: center;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
-            animation: zoomIn 0.3s ease;
+            background: white; padding: 15px; border-radius: 15px;
+            max-width: 85%; text-align: center; animation: zoomIn 0.3s ease;
         }
-        .modal-card img { width: 100%; border-radius: 3px; margin-bottom: 10px; }
-        .btn-keep {
-            background: var(--primary); color: white; border: none;
-            padding: 10px 25px; border-radius: 30px; font-family: 'Kanit';
-            font-size: 1rem; cursor: pointer; margin-top: 15px;
-            box-shadow: 0 5px 10px rgba(255, 92, 138, 0.4);
-        }
-        @keyframes zoomIn { from { transform: scale(0.5); } to { transform: scale(1); } }
+        .modal-card img { width: 100%; border-radius: 10px; }
 
         /* --- FINAL MESSAGE --- */
         .final-msg-container {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(255,255,255,0.9); 
-            z-index: 200;
-            display: flex; align-items: center; justify-content: center;
-            opacity: 0; pointer-events: none;
-            transition: opacity 1.2s ease-out;
-            overflow: hidden;
+            background: rgba(255,255,255,0.95); z-index: 200;
+            display: none; align-items: center; justify-content: center;
+            overflow-y: auto; padding: 20px; box-sizing: border-box;
         }
-        
-        .final-floaters {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            z-index: 201; pointer-events: none;
-        }
-
         .final-msg-box {
-            position: relative; z-index: 205;
-            text-align: center; padding: 30px; box-sizing: border-box;
-            background: white; border-radius: 20px; 
-            box-shadow: 0 15px 40px rgba(255, 92, 138, 0.2);
-            max-width: 85%;
-            transform: scale(0.8) translateY(30px); 
-            opacity: 0;
-            transition: all 1.5s cubic-bezier(0.25, 0.8, 0.25, 1);
-            max-height: 90vh; overflow-y: auto;
+            background: white; padding: 30px; border-radius: 20px; 
+            text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            max-width: 400px;
         }
+        .final-msg-box h1 { color: var(--primary); margin-top: 0; }
+        .final-msg-box p { line-height: 1.6; color: #444; text-align: left; }
 
-        .final-msg-container.show-final { opacity: 1; pointer-events: auto; }
-        .final-msg-container.show-final .final-msg-box { transform: scale(1) translateY(0); opacity: 1; }
-
-        .final-msg-box h1 { color: var(--primary); font-size: 1.8rem; margin-bottom: 10px; }
-        .final-msg-box p { font-size: 0.95rem; line-height: 1.6; color: #555; white-space: pre-wrap; }
-
+        @keyframes zoomIn { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
     </style>
 </head>
 <body onclick="playAudio()">
 
     <audio id="bgm" loop><source src="song.mp3" type="audio/mpeg"></audio>
-
     <div class="bg-floaters" id="bgFloaters"></div>
 
     <div id="page1" class="page active">
         <div class="chase-area">
-            <h2 style="text-align:center; margin-top:100px; color:var(--accent);">จดหมายรักฉบับนี้<br>ต้องใช้ความพยายามนะ! 😝</h2>
+            <h2 style="text-align:center; margin-top:100px;">จดหมายฉบับนี้<br>ต้องใช้ความพยายามนะ! 😝</h2>
             <div class="flying-envelope" id="envelope" onmouseover="moveEnv()" ontouchstart="moveEnvMobile(event)">
                 <div class="wing left"></div><div class="env-body">💌</div><div class="wing right"></div>
             </div>
@@ -209,28 +162,27 @@
     </div>
 
     <div id="page2" class="page">
-        <h2 style="margin-bottom:20px;">เราคบกันมา...</h2>
+        <h2 style="margin-bottom:20px;">เรารักกันมา...</h2>
         <div class="timer-display" id="timer">คำนวณเวลา...</div>
         <div class="heart-container" onclick="fillHeart()">
             <svg viewBox="0 0 200 200" width="100%" height="100%">
                 <defs>
                     <mask id="heartMask"><path d="M100,180 C20,130 0,80 0,50 C0,20 25,0 55,0 C75,0 90,15 100,30 C110,15 125,0 145,0 C175,0 200,20 200,50 C200,80 180,130 100,180 Z" fill="white"/></mask>
-                    <linearGradient id="pinkGrad" x1="0%" y1="0%" x2="100%" x2="100%"><stop offset="0%" style="stop-color:#ff9a9e;stop-opacity:1" /><stop offset="100%" style="stop-color:#fecfef;stop-opacity:1" /></linearGradient>
+                    <linearGradient id="pinkGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#ff9a9e;" /><stop offset="100%" style="stop-color:#fecfef;" /></linearGradient>
                 </defs>
                 <path d="M100,180 C20,130 0,80 0,50 C0,20 25,0 55,0 C75,0 90,15 100,30 C110,15 125,0 145,0 C175,0 200,20 200,50 C200,80 180,130 100,180 Z" fill="none" stroke="#ff5c8a" stroke-width="4" />
-                <rect x="0" y="200" width="200" height="200" fill="url(#pinkGrad)" mask="url(#heartMask)" id="waterLevel"><transition style="transition: y 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);"></transition></rect>
-                <ellipse cx="60" cy="50" rx="15" ry="10" fill="white" opacity="0.4" transform="rotate(-30 60 50)"/>
+                <rect x="0" y="200" width="200" height="200" fill="url(#pinkGrad)" mask="url(#heartMask)" id="waterLevel"></rect>
             </svg>
-            <div style="position:absolute; top:45%; width:100%; text-align:center; color:#fff; font-weight:bold; text-shadow:0 1px 3px rgba(0,0,0,0.2);"><span id="percent">0%</span></div>
+            <div style="position:absolute; top:45%; width:100%; text-align:center; color:#fff; font-weight:bold;"><span id="percent">0%</span></div>
         </div>
-        <p class="tap-msg">👆 จิ้มหัวใจเติมรักให้เต็ม!</p>
+        <p style="margin-top:20px; color:#999; animation:blink 1s infinite;">👆 จิ้มหัวใจเติมรักให้เต็ม!</p>
     </div>
 
     <div id="page3" class="page">
         <h2 style="margin-bottom:20px;">มีความลับซ่อนอยู่...</h2>
         <div class="scratch-box">
             <img src="photo1.jpg" style="width:100%; height:100%; object-fit:cover;">
-            <canvas id="scratchCanvas" width="300" height="300" style="position:absolute; top:0; left:0; cursor:pointer;"></canvas>
+            <canvas id="scratchCanvas" width="300" height="300" style="position:absolute; top:0; left:0;"></canvas>
         </div>
         <p style="margin-top:15px; color:#888;">ขูดให้สะอาดเลยนะ</p>
     </div>
@@ -239,166 +191,131 @@
         <div class="inventory">
             <div class="inv-slot" id="slot1"></div><div class="inv-slot" id="slot2"></div><div class="inv-slot" id="slot3"></div><div class="inv-slot" id="slot4"></div><div class="inv-slot" id="slot5"></div>
         </div>
-        <div class="game-hint">ช่วยตามหารูปที่ซ่อนอยู่ 5 ใบหน่อยนะ! 👇</div>
         <div class="room-scene">
-            <div class="hidden-item" style="top:15%; right:25%; transform:rotate(5deg);" onclick="foundPhoto(1, this)"><img src="photo1.jpg"></div>
-            <div class="hidden-item" style="bottom:20%; left:10%; transform:rotate(-8deg);" onclick="foundPhoto(2, this)"><img src="photo2.jpg"></div>
-            <div class="hidden-item" style="top:45%; left:15%; z-index:1;" onclick="foundPhoto(3, this)"><img src="photo3.jpg"></div>
-            <div class="hidden-item" style="bottom:15%; right:30%; transform:rotate(12deg);" onclick="foundPhoto(4, this)"><img src="photo4.jpg"></div>
-            <div class="hidden-item" style="bottom:8%; left:40%; transform:rotate(-5deg);" onclick="foundPhoto(5, this)"><img src="photo5.jpg"></div>
+            <div class="hidden-item" style="top:20%; left:10%;" onclick="foundPhoto(1, this)"><img src="photo1.jpg"></div>
+            <div class="hidden-item" style="bottom:25%; right:15%;" onclick="foundPhoto(2, this)"><img src="photo2.jpg"></div>
+            <div class="hidden-item" style="top:40%; right:10%;" onclick="foundPhoto(3, this)"><img src="photo3.jpg"></div>
+            <div class="hidden-item" style="bottom:10%; left:20%;" onclick="foundPhoto(4, this)"><img src="photo4.jpg"></div>
+            <div class="hidden-item" style="top:10%; right:30%;" onclick="foundPhoto(5, this)"><img src="photo5.jpg"></div>
         </div>
     </div>
 
     <div class="modal-overlay" id="previewModal">
         <div class="modal-card">
             <img src="" id="previewImg">
-            <p id="previewCaption" style="font-weight:400; color:#555; margin:0; line-height:1.4; font-size: 0.9rem;">...</p>
-            <button class="btn-keep" onclick="confirmKeep()">เก็บใส่กระเป๋า ❤️</button>
+            <p id="previewCaption" style="font-weight:400; color:#555; margin:15px 0; white-space: pre-wrap;"></p>
+            <button style="background:var(--primary); color:white; border:none; padding:10px 20px; border-radius:20px;" onclick="confirmKeep()">เก็บเข้ากระเป๋า ❤️</button>
         </div>
     </div>
 
     <div class="final-msg-container" id="finalMsgContainer">
-        <div class="final-floaters" id="finalFloaters"></div>
         <div class="final-msg-box">
-            <h1>"สุดที่รัก"</h1>
-            <p>วันวาเลนไทน์นี้ หนูมีเรื่องจะบอกพี่
-ขอบคุณที่เข้ามาเป็นความสดใสในชีวิตหนูนะคะ
-ขอบคุณที่คอยปลอบ คอยจับมือกันเดินช้า ๆ
-คอยบอกรัก คอยไปกินของอร่อย ๆ
-ขอบคุณที่เป็นกำลังใจให้อยู่เสมอ
-ขอบคุณที่อยู่ให้รัก สุดท้ายนี้ 
-ขอโทษที่บางครั้งหนูทำตัวไม่น่ารัก
-ขอบคุณที่ยอมรับและให้โอกาส 
-อยู่ด้วยกันไปนาน ๆ เลยนะคะ
-หนูอยู่ตรงนี้เสมอนะคะ 
-รักพี่🐻🫶🏻</p>
+            <h1>สุดที่รัก</h1>
+            <p>
+                วันวาเลนไทน์นี้ หนูมีเรื่องจะบอกพี่<br>
+                ขอบคุณที่เข้ามาเป็นความสดใสในชีวิตหนูนะคะ<br>
+                ขอบคุณที่คอยปลอบ คอยจับมือกันเดินช้า ๆ<br>
+                คอยบอกรัก คอยไปกินของอร่อย ๆ<br>
+                ขอบคุณที่เป็นกำลังใจให้อยู่เสมอ<br>
+                ขอบคุณที่อยู่ให้รัก สุดท้ายนี้ <br>
+                ขอโทษที่บางครั้งหนูทำตัวไม่น่ารัก<br>
+                ขอบคุณที่ยอมรับและให้โอกาส <br>
+                อยู่ด้วยกันไปนาน ๆ เลยนะคะ<br>
+                หนูอยู่ตรงนี้เสมอนะคะ <br>
+                รักพี่🐻🫶🏻
+            </p>
         </div>
     </div>
 
     <script>
         // --- CONFIG ---
-        const startDate = new Date(2024, 10, 10); // 10 พฤศจิกายน 2024 (Month เป็น 0-indexed: 10 = Nov)
+        const startDate = new Date(2024, 10, 10); // 10 พฤศจิกายน 2024
         const photos = [
             { src: "photo1.jpg", caption: "ไปดูหนังแล้วได้ถ่ายรูปด้วยกัน\nครั้งแรก 💕🤏🏻" },
             { src: "photo2.jpg", caption: "ชีเสริฟฟฟฟฟฟเกิ๊นนน🐻" },
             { src: "photo3.jpg", caption: "มัทฉะที่พี่เคยสั่งให้\nหลังจากนั้นก็เป็นร้านโปรดหนู\nตลอดปัยยย🫶🏻" },
-            { src: "photo4.jpg", caption: "พี่เรียกหนูว่าไอ้เจ้าความรัก \nพี่ต้องมีใจให้หนูชัวๆหนูมั่นใจ! \n🤣😳🫣" },
-            { src: "photo5.jpg", caption: "หนูโดน PDPA แน่ๆแอบถ่าย \nแต่ถ่ายคนรักคงไม่เป็นไรมั้งงง \nถึงหนูจะมอม แต่พี่น่ารักงะะะ🤏🏻✨" }
+            { src: "photo4.jpg", caption: "พี่เรียกหนูว่าไอ้เจ้าความรัก\nพี่ต้องมีใจให้หนูชัวๆหนูมั่นใจ!\n🤣😳🫣" },
+            { src: "photo5.jpg", caption: "หนูโดน PDPA แน่ๆแอบถ่าย\nแต่ถ่ายคนรักคงไม่เป็นไรมั้งงง\nถึงหนูจะมอม แต่พี่น่ารักงะะะ🤏🏻✨" }
         ];
 
-        // --- GLOBAL: AUDIO & BACKGROUND ---
         let audioPlaying = false;
-        function playAudio() {
-            if(!audioPlaying) {
-                document.getElementById('bgm').play().catch(()=>{});
-                audioPlaying = true;
-                const hint = document.querySelector('.music-hint');
-                if(hint) hint.style.display = 'none';
-            }
-        }
-        
-        const emojis = ['🌸', '❤️', '💌', '🌹', '✨', '💖'];
+        function playAudio() { if(!audioPlaying) { document.getElementById('bgm').play().catch(()=>{}); audioPlaying=true; document.querySelector('.music-hint').style.display='none'; } }
+
         function createFloaters(containerId, num) {
             const container = document.getElementById(containerId);
+            const ems = ['🌸', '❤️', '🌹', '✨', '💖'];
             for(let i=0; i<num; i++) {
-                let el = document.createElement('div');
-                el.className = 'floater';
-                el.innerText = emojis[Math.floor(Math.random() * emojis.length)];
-                el.style.left = Math.random() * 100 + '%';
-                el.style.fontSize = (Math.random() * 20 + 15) + 'px';
-                el.style.animationDuration = (Math.random() * 5 + 5) + 's';
-                el.style.animationDelay = (Math.random() * 5) + 's';
+                let el = document.createElement('div'); el.className = 'floater';
+                el.innerText = ems[Math.floor(Math.random()*ems.length)];
+                el.style.left = Math.random()*100+'%'; el.style.fontSize = (Math.random()*20+15)+'px';
+                el.style.animationDuration = (Math.random()*5+5)+'s'; el.style.animationDelay = (Math.random()*5)+'s';
                 container.appendChild(el);
             }
         }
         createFloaters('bgFloaters', 20);
 
         function goTo(id) {
-            document.querySelectorAll('.page').forEach(p => {
-                p.style.opacity = 0;
-                setTimeout(() => p.classList.remove('active'), 500);
-            });
-            setTimeout(() => {
-                const p = document.getElementById(id);
-                p.classList.add('active');
-                p.style.opacity = 1;
-                if(id==='page2') startTimer();
-                if(id==='page3') startScratch();
-            }, 500);
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            const target = document.getElementById(id); target.classList.add('active');
+            if(id==='page2') startTimer();
+            if(id==='page3') startScratch();
         }
 
         const env = document.getElementById('envelope');
-        env.style.left = "50%"; env.style.top = "40%"; env.style.transform = "translate(-50%, -50%)";
         function moveEnv() {
             const x = Math.random() * (window.innerWidth - 150);
             const y = Math.random() * (window.innerHeight - 150);
-            env.style.transform = "translate(0,0)"; env.style.left = x + 'px'; env.style.top = y + 'px';
+            env.style.left = x + 'px'; env.style.top = y + 'px';
         }
-        let touches = 0;
-        function moveEnvMobile(e) {
-            touches++;
-            if(touches < 4) { e.preventDefault(); moveEnv(); }
-            else { setTimeout(() => goTo('page2'), 200); }
-        }
+        function moveEnvMobile(e) { e.preventDefault(); moveEnv(); }
         env.onclick = () => goTo('page2');
 
         function startTimer() {
             setInterval(() => {
-                const now = new Date();
-                const diff = now - startDate;
-                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const diff = new Date() - startDate;
+                const d = Math.floor(diff / (1000*60*60*24));
                 const h = Math.floor((diff / (1000*60*60)) % 24);
                 const m = Math.floor((diff / (1000*60)) % 60);
                 const s = Math.floor((diff / 1000) % 60);
-                document.getElementById('timer').innerText = `${days} วัน ${h} ชั่วโมง ${m} นาที ${s} วินาที`;
+                document.getElementById('timer').innerText = `${d} วัน ${h} ชม. ${m} น. ${s} ว.`;
             }, 1000);
         }
 
-        let percent = 0;
+        let p_count = 0;
         function fillHeart() {
-            percent += 20; if(percent > 100) percent = 100;
-            document.getElementById('waterLevel').setAttribute('y', 200 - (200 * (percent/100)));
-            document.getElementById('percent').innerText = percent + "%";
-            if(percent >= 100) setTimeout(() => goTo('page3'), 800);
+            p_count += 20; if(p_count > 100) p_count = 100;
+            document.getElementById('waterLevel').setAttribute('y', 200 - (200 * (p_count/100)));
+            document.getElementById('percent').innerText = p_count + "%";
+            if(p_count >= 100) setTimeout(() => goTo('page3'), 800);
         }
 
         function startScratch() {
             const c = document.getElementById('scratchCanvas'); const ctx = c.getContext('2d');
             ctx.fillStyle = '#C0C0C0'; ctx.fillRect(0,0,300,300);
-            let isDrawing = false;
-            function scratch(x,y) {
+            const scratch = (x,y) => {
                 ctx.globalCompositeOperation = 'destination-out'; ctx.beginPath(); ctx.arc(x,y,25,0,Math.PI*2); ctx.fill();
                 const d = ctx.getImageData(0,0,300,300).data; let t = 0;
                 for(let i=3; i<d.length; i+=4) if(d[i]===0) t++;
-                if(t/(300*300) > 0.6) { c.style.display = 'none'; setTimeout(() => goTo('page4'), 1000); }
-            }
-            const down = () => isDrawing=true; const up = () => isDrawing=false;
-            const move = (e) => { if(!isDrawing) return; const r = c.getBoundingClientRect(); scratch((e.touches?e.touches[0].clientX:e.clientX)-r.left, (e.touches?e.touches[0].clientY:e.clientY)-r.top); }
-            c.addEventListener('mousedown', down); c.addEventListener('mouseup', up); c.addEventListener('mousemove', move);
-            c.addEventListener('touchstart', (e)=>{down();e.preventDefault()}); c.addEventListener('touchend', up); c.addEventListener('touchmove', move);
+                if(t/(300*300) > 0.5) { c.style.display='none'; setTimeout(()=>goTo('page4'), 1000); }
+            };
+            c.addEventListener('mousemove', (e)=>{ const r=c.getBoundingClientRect(); scratch(e.clientX-r.left, e.clientY-r.top); });
+            c.addEventListener('touchmove', (e)=>{ e.preventDefault(); const r=c.getBoundingClientRect(); scratch(e.touches[0].clientX-r.left, e.touches[0].clientY-r.top); });
         }
 
-        let currentPhotoIdx = 0; let currentElement = null; let collected = 0;
+        let currentIdx = 0; let currentEl = null; let collected = 0;
         function foundPhoto(idx, el) {
-            currentPhotoIdx = idx; currentElement = el;
+            currentIdx = idx; currentEl = el;
             document.getElementById('previewImg').src = photos[idx-1].src;
             document.getElementById('previewCaption').innerText = photos[idx-1].caption;
             document.getElementById('previewModal').style.display = 'flex';
         }
         function confirmKeep() {
             document.getElementById('previewModal').style.display = 'none';
-            currentElement.style.opacity = '0'; currentElement.style.transform = 'scale(0)';
-            setTimeout(() => {
-                const slot = document.getElementById('slot' + currentPhotoIdx);
-                slot.classList.add('filled'); slot.innerHTML = `<img src="${photos[currentPhotoIdx-1].src}">`;
-                collected++;
-                if(collected === 5) {
-                    createFloaters('finalFloaters', 30);
-                    setTimeout(() => {
-                        document.getElementById('finalMsgContainer').classList.add('show-final');
-                    }, 800);
-                }
-            }, 300);
+            currentEl.style.display = 'none';
+            const slot = document.getElementById('slot' + currentIdx);
+            slot.classList.add('filled'); slot.innerHTML = `<img src="${photos[currentIdx-1].src}">`;
+            collected++;
+            if(collected === 5) setTimeout(() => { document.getElementById('finalMsgContainer').style.display = 'flex'; }, 1000);
         }
     </script>
 </body>
