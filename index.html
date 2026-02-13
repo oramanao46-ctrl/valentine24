@@ -108,7 +108,7 @@
             cursor: crosshair; touch-action: none;
         }
 
-        /* --- PAGE 4: LIVING ROOM --- */
+        /* --- PAGE 4: GAME --- */
         .room-scene {
             width: 100%; height: 100%; position: relative;
             background-image: url('photo6.jpg'); 
@@ -164,21 +164,52 @@
             font-size: 1rem; cursor: pointer; margin-top: 15px; width: 100%;
         }
 
-        /* --- FINAL MESSAGE --- */
+        /* --- FINAL MESSAGE (MODIFIED FOR CENTERING) --- */
         .final-msg-container {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(255,255,255,0.95); 
-            z-index: 200; display: none; align-items: center; justify-content: center;
+            background: rgba(255, 245, 247, 0.98); /* พื้นหลังจางๆ */
+            z-index: 200; display: none; 
+            align-items: center; justify-content: center;
             opacity: 0; transition: opacity 1.2s ease-out;
             padding: 20px;
         }
         .final-msg-box {
-            text-align: center; padding: 30px;
-            background: white; border-radius: 20px; box-shadow: 0 15px 40px rgba(255, 92, 138, 0.2);
-            max-width: 90%; max-height: 80vh; overflow-y: auto; transform: scale(0.8); transition: all 1s;
+            text-align: center; /* จัดตัวอักษรให้อยู่กลาง */
+            padding: 40px 30px;
+            background: white; border-radius: 30px; 
+            box-shadow: 0 15px 50px rgba(255, 92, 138, 0.15);
+            width: 100%;
+            max-width: 360px; /* ขนาดกรอบ */
+            max-height: 85vh; 
+            overflow-y: auto; 
+            transform: scale(0.8); transition: all 1s;
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* จัดลูกๆ ให้อยู่กลางกรอบ */
+            justify-content: center;
         }
         .final-msg-container.show-final { display: flex; opacity: 1; }
         .final-msg-container.show-final .final-msg-box { transform: scale(1); }
+        
+        .final-msg-box h2 {
+            color: var(--primary);
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+            margin-top: 0;
+        }
+        .final-msg-box p {
+            font-size: 1.05rem;
+            line-height: 2;
+            color: #555;
+            margin: 0;
+            text-align: center; /* ข้อความบรรยายอยู่กลาง */
+        }
+        .final-signature {
+            margin-top: 30px;
+            font-weight: 600;
+            color: var(--accent);
+            font-size: 1.2rem;
+        }
         
         @keyframes zoomIn { from { transform: scale(0.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
     </style>
@@ -248,8 +279,8 @@
 
     <div class="final-msg-container" id="finalMsgContainer">
         <div class="final-msg-box">
-            <h2 style="color:var(--primary); margin-top:0;">"สุดที่รัก"</h2>
-            <p style="font-size:1.05rem; line-height:1.8; text-align: left; color: #444;">
+            <h2>"สุดที่รัก"</h2>
+            <p>
                 วันวาเลนไทน์นี้ หนูมีเรื่องจะบอกพี่<br>
                 ขอบคุณที่เข้ามาเป็นความสดใสในชีวิตหนูนะคะ<br>
                 ขอบคุณที่คอยปลอบ คอยจับมือกันเดินช้า ๆ<br>
@@ -259,14 +290,14 @@
                 ขอโทษที่บางครั้งหนูทำตัวไม่น่ารัก<br>
                 ขอบคุณที่ยอมรับและให้โอกาส<br>
                 อยู่ด้วยกันไปนาน ๆ เลยนะคะ<br>
-                หนูอยู่ตรงนี้เสมอนะคะ<br><br>
-                <strong>รักพี่🐻🫶🏻</strong>
+                หนูอยู่ตรงนี้เสมอนะคะ
             </p>
+            <div class="final-signature">รักพี่🐻🫶🏻</div>
         </div>
     </div>
 
     <script>
-        // วันเริ่มความสัมพันธ์ 10/11/2024 (JS Month is 0-indexed: Jan=0, Nov=10)
+        // วันเริ่มความสัมพันธ์ 10/11/2024
         const startDate = new Date(2024, 10, 10); 
         const photos = [
             { src: "photo1.jpg", caption: "ไปดูหนังแล้วได้ถ่ายรูปด้วยกัน\nครั้งแรก 💕🤏🏻" },
@@ -314,7 +345,6 @@
             }, 500);
         }
 
-        // --- PAGE 1: ENVELOPE ---
         const env = document.getElementById('envelope');
         env.style.left = "50%"; env.style.top = "40%"; env.style.transform = "translate(-50%, -50%)";
         function moveEnv() {
@@ -330,7 +360,6 @@
         }
         env.onclick = () => goTo('page2');
 
-        // --- PAGE 2: TIMER ---
         function startTimer() {
             setInterval(() => {
                 const now = new Date();
@@ -350,7 +379,6 @@
             if(percent >= 100) setTimeout(() => goTo('page3'), 800);
         }
 
-        // --- PAGE 3: SCRATCH ---
         function startScratch() {
             const img = document.getElementById('scratchImg');
             const c = document.getElementById('scratchCanvas');
@@ -389,7 +417,6 @@
             c.addEventListener('touchmove', handleMove);
         }
 
-        // --- PAGE 4: GAME ---
         let currentPhotoIdx = 0; let currentElement = null; let collected = 0;
         function foundPhoto(idx, el) {
             currentPhotoIdx = idx; currentElement = el;
