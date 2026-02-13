@@ -164,51 +164,50 @@
             font-size: 1rem; cursor: pointer; margin-top: 15px; width: 100%;
         }
 
-        /* --- FINAL MESSAGE (MODIFIED FOR CENTERING) --- */
+        /* --- FINAL MESSAGE (จัดตรงกลางทั้งหมด) --- */
         .final-msg-container {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(255, 245, 247, 0.98); /* พื้นหลังจางๆ */
+            background: rgba(0,0,0,0.3); /* ฉากหลังมืดเล็กน้อยให้กรอบขาวเด่น */
             z-index: 200; display: none; 
             align-items: center; justify-content: center;
             opacity: 0; transition: opacity 1.2s ease-out;
             padding: 20px;
+            box-sizing: border-box;
         }
         .final-msg-box {
-            text-align: center; /* จัดตัวอักษรให้อยู่กลาง */
-            padding: 40px 30px;
-            background: white; border-radius: 30px; 
-            box-shadow: 0 15px 50px rgba(255, 92, 138, 0.15);
+            background: white; 
+            padding: 40px 25px; 
+            border-radius: 30px; 
+            box-shadow: 0 15px 45px rgba(0,0,0,0.1);
             width: 100%;
-            max-width: 360px; /* ขนาดกรอบ */
+            max-width: 380px;
             max-height: 85vh; 
-            overflow-y: auto; 
+            overflow-y: auto;
+            text-align: center; /* จัดตัวอักษรให้อยู่กลาง */
             transform: scale(0.8); transition: all 1s;
             display: flex;
             flex-direction: column;
-            align-items: center; /* จัดลูกๆ ให้อยู่กลางกรอบ */
-            justify-content: center;
+            align-items: center; /* จัด element ให้อยู่กลางตามแนวขวาง */
         }
         .final-msg-container.show-final { display: flex; opacity: 1; }
         .final-msg-container.show-final .final-msg-box { transform: scale(1); }
         
-        .final-msg-box h2 {
+        .final-title {
             color: var(--primary);
-            font-size: 1.8rem;
-            margin-bottom: 25px;
-            margin-top: 0;
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 30px;
         }
-        .final-msg-box p {
+        .final-text {
             font-size: 1.05rem;
-            line-height: 2;
-            color: #555;
-            margin: 0;
-            text-align: center; /* ข้อความบรรยายอยู่กลาง */
+            line-height: 2.1;
+            color: #444;
+            margin-bottom: 35px;
         }
         .final-signature {
-            margin-top: 30px;
             font-weight: 600;
             color: var(--accent);
-            font-size: 1.2rem;
+            font-size: 1.3rem;
         }
         
         @keyframes zoomIn { from { transform: scale(0.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
@@ -279,8 +278,8 @@
 
     <div class="final-msg-container" id="finalMsgContainer">
         <div class="final-msg-box">
-            <h2>"สุดที่รัก"</h2>
-            <p>
+            <div class="final-title">"สุดที่รัก"</div>
+            <div class="final-text">
                 วันวาเลนไทน์นี้ หนูมีเรื่องจะบอกพี่<br>
                 ขอบคุณที่เข้ามาเป็นความสดใสในชีวิตหนูนะคะ<br>
                 ขอบคุณที่คอยปลอบ คอยจับมือกันเดินช้า ๆ<br>
@@ -291,13 +290,13 @@
                 ขอบคุณที่ยอมรับและให้โอกาส<br>
                 อยู่ด้วยกันไปนาน ๆ เลยนะคะ<br>
                 หนูอยู่ตรงนี้เสมอนะคะ
-            </p>
+            </div>
             <div class="final-signature">รักพี่🐻🫶🏻</div>
         </div>
     </div>
 
     <script>
-        // วันเริ่มความสัมพันธ์ 10/11/2024
+        // เริ่มความสัมพันธ์ 10 พ.ย. 2024
         const startDate = new Date(2024, 10, 10); 
         const photos = [
             { src: "photo1.jpg", caption: "ไปดูหนังแล้วได้ถ่ายรูปด้วยกัน\nครั้งแรก 💕🤏🏻" },
